@@ -3,7 +3,7 @@
     font-size: 200px;
 }
 
-#player{
+/* #player{
     width: 50px;
     height: 50px;
     background-color: red;
@@ -22,4 +22,7 @@
     width: 1000px;
     height: 500px;
     background-color: lightgreen;
+} */
+.hidden {
+    display: none;
 }
