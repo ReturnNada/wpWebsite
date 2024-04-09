@@ -3,15 +3,23 @@
     font-size: 200px;
 }
 
-#myDiv{
+#player{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: relative;
+}
+
+#gameBoard{
     text-align: center;
     width: 1000px;
     height: 500px;
     background-color: lightgreen;
 }
 
-#player{
-    width: 50px;
-    height: 50px;
-    background-color: red;
+#myDiv{
+    text-align: center;
+    width: 1000px;
+    height: 500px;
+    background-color: lightgreen;
 }
