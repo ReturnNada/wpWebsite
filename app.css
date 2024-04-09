@@ -22,7 +22,12 @@
     width: 1000px;
     height: 500px;
     background-color: lightgreen;
-} */
+}
+*/
 .hidden {
     display: none;
+}
+
+canvas {
+    image-rendering: pixelated;
 }
