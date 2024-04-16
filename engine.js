@@ -2,9 +2,6 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
-
 let sprites = [];
 //gets a spritesheet by its data-id attribute
 function getSheetById(id) {
