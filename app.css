@@ -30,4 +30,5 @@
 
 canvas {
     image-rendering: pixelated;
+    background-color: lightgreen;
 }
