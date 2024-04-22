@@ -2,6 +2,14 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
+class obsticle{
+    instantiateObst(xc, yc, len, wid){  
+        ctx.fillStyle = "green";
+        ctx.fillRect(xc, yc, len, wid);
+    }
+}
+let obst1 = new obsticle;
+
 let sprites = [];
 //gets a spritesheet by its data-id attribute
 function getSheetById(id) {
@@ -37,39 +45,6 @@ function draw() {
             ctx.drawImage(sprite.sheet, ...sprite.cut, ...sprite.pos, ...sprite.size);
         }
     }
+    obst1.instantiateObst(300, canvas.height - 240, 120, 240);
     requestAnimationFrame(draw);
 }
-
-/*
-const player = document.getElementById("player");
-const myDiv = document.getElementById("myDiv");
-let posx = 25;
-let posy = 425;
-player.style.top = "425px";
-player.style.left = "25px";
-
-window.addEventListener("keydown", move);
-
-function move(event){
-    switch(event.key){
-        case "w":
-            posy -= 20;
-            player.style.top = posy + "px";
-            break;
-        case "a":
-            posx -= 20;
-            player.style.left = posx + "px";
-            break;
-        case "s":
-            posy += 20;
-            player.style.top = posy + "px";
-            break;
-        case "d":
-            posx += 20;
-            player.style.left = posx + "px";
-            break;
-        default:
-            break;
-    }
-}
-*/
