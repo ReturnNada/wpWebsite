@@ -2,13 +2,23 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-class obsticle{
-    instantiateObst(xc, yc, len, wid){  
+class obstacle{
+    constructor(len, hei){
+        this.len = len;
+        this.hei = hei;
+    }
+
+    drawObst(x, y){  
+        this.x = x;
+        this.y = y;
+
         ctx.fillStyle = "green";
-        ctx.fillRect(xc, yc, len, wid);
+        ctx.fillRect(x, y, this.len, this.hei);
     }
 }
-let obst1 = new obsticle;
+
+let obst1 = new obstacle(120, 120);
+let obst2 = new obstacle(120, 240);
 
 let sprites = [];
 //gets a spritesheet by its data-id attribute
@@ -45,6 +55,9 @@ function draw() {
             ctx.drawImage(sprite.sheet, ...sprite.cut, ...sprite.pos, ...sprite.size);
         }
     }
-    obst1.instantiateObst(300, canvas.height - 240, 120, 240);
+    obst1.drawObst(300, canvas.height - obst1.hei);
+    obst2.drawObst(650, canvas.height - obst2.hei);
     requestAnimationFrame(draw);
+    collisionMaster(obst1);
+    collisionMaster(obst2);
 }
