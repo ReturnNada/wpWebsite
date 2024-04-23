@@ -1,5 +1,6 @@
 let gravity = 0.05;
 let isGrounded = true;
+let win = false;
 
 sprites.push({
     name: "player",
@@ -25,7 +26,9 @@ function listenMove(e) {
     else if (e.code == "KeyD" || e.code == "ArrowRight") {
         player.vel[0] = 2;
     }
+    /* 
 
+    "Test" key
     else if (e.code == "KeyR") {
         console.log("x" + player.pos[0] + "y" + player.pos[1]);
         console.log("first" + (player.pos[1] + player.size[1]));
@@ -33,6 +36,8 @@ function listenMove(e) {
 
         console.log(obst1.y - player.size[1] + 1);
     }
+    
+    */
 }
 //listen for keys being unpressed
 function listenUp(e) {
@@ -77,7 +82,7 @@ function checkPlayerState(){
 function collisionMaster(obst){
     //Check for collision with object
     //top
-    if((player.pos[1] + player.size[1] > obst.y) && (player.pos[1] + player.size[1] < obst.y + player.size[1]/8) && (player.pos[0] + player.size[0] > obst.x) && (player.pos[0] < obst.x + obst.len)){
+    if((player.pos[1] + player.size[1] > obst.y) && (player.pos[1] + player.size[1] < obst.y + obst.hei/16) && (player.pos[0] + player.size[0] > obst.x) && (player.pos[0] < obst.x + obst.len)){
         player.pos[1] = obst.y - player.size[1];
         player.vel[1] = 0;
     }
@@ -86,10 +91,31 @@ function collisionMaster(obst){
         player.pos[0] = obst.x - player.size[0];
     }
     //right
-    else if((player.pos[0] < obst.x + obst.len) && (player.pos[0] > obst.x + player.size[0]/4) && (player.pos[1] > obst.y - player.size[1] + 1) && (player.pos[1] < canvas.height)){
+    else if((player.pos[0] < obst.x + obst.len) && (player.pos[0] > obst.x + obst.len/2) && (player.pos[1] > obst.y - player.size[1] + 1) && (player.pos[1] < canvas.height)){
         player.pos[0] = obst.x + obst.len;
     }
     requestAnimationFrame(collisionMaster);
+}
+
+function checkWin(obst){
+    //Check for collision with object
+    //top
+    if((player.pos[1] + player.size[1] > obst.y) && (player.pos[1] + player.size[1] < obst.y + obst.hei/4) && (player.pos[0] + player.size[0] > obst.x) && (player.pos[0] < obst.x + obst.len)){
+        player.pos[1] = obst.y - player.size[1];
+        player.vel[1] = 0;
+        win = true;
+    }
+    //left
+    else if((player.pos[0] > obst.x - player.size[0]) && (player.pos[0] + player.size[0] < obst.x + player.size[0]/4) && (player.pos[1] > obst.y - player.size[1] + 1) && (player.pos[1] < canvas.height)){
+        player.pos[0] = obst.x - player.size[0];
+        win = true;
+    }
+    //right
+    else if((player.pos[0] < obst.x + obst.len) && (player.pos[0] > obst.x + obst.len/2) && (player.pos[1] > obst.y - player.size[1] + 1) && (player.pos[1] < canvas.height)){
+        player.pos[0] = obst.x + obst.len;
+        win = true;
+    }
+    requestAnimationFrame(checkWin);
 }
 
 window.addEventListener("keydown", listenMove);

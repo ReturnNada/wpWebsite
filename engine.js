@@ -8,17 +8,20 @@ class obstacle{
         this.hei = hei;
     }
 
-    drawObst(x, y){  
+    drawObst(x, y, color){  
         this.x = x;
         this.y = y;
 
-        ctx.fillStyle = "green";
+        let col = color.toString();
+
+        ctx.fillStyle = col;
         ctx.fillRect(x, y, this.len, this.hei);
     }
 }
 
 let obst1 = new obstacle(120, 120);
 let obst2 = new obstacle(120, 240);
+let key = new obstacle(20, 20);
 
 let sprites = [];
 //gets a spritesheet by its data-id attribute
@@ -55,9 +58,19 @@ function draw() {
             ctx.drawImage(sprite.sheet, ...sprite.cut, ...sprite.pos, ...sprite.size);
         }
     }
-    obst1.drawObst(300, canvas.height - obst1.hei);
-    obst2.drawObst(650, canvas.height - obst2.hei);
-    requestAnimationFrame(draw);
+    obst1.drawObst(300, canvas.height - obst1.hei, "green");
+    obst2.drawObst(650, canvas.height - obst2.hei, "green");
+    key.drawObst(650 + obst2.len/2 - key.len/2, canvas.height - obst2.hei - 2*key.hei, "yellow");
+    
     collisionMaster(obst1);
     collisionMaster(obst2);
+    checkWin(key);
+
+    if(win){
+        ctx.fillStyle = "black";
+        ctx.font = "50px Arial";
+        ctx.fillText("You Win!", 440, 180);
+    }
+    
+    requestAnimationFrame(draw);
 }
